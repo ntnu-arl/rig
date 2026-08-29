@@ -1,0 +1,41 @@
+<launch>
+  <arg name="bag_name" default="" />
+  <arg name="s" default="0" />
+  <arg name="duration" default="-1" />
+  <arg name="record" default="false"/>
+  <arg name="radar_config" default="radar"/>
+  <arg name="angle_noise" default="true"/>
+
+  <node pkg="rig" type="rig_rosbag" name="rig_node" output="screen" clear_params="true" required="true" launch-prefix='bash -c "sleep 5; exec \"$0\" \"$@\"" --'>
+    <rosparam file="$(find rig)/config/rig.yaml" command="load" />
+    <rosparam file="$(find rig)/config/$(arg radar_config).yaml" command="load" ns="sensor"/>
+
+    <param name="radar/use_angle_noise" value="$(arg angle_noise)"/>
+
+    <remap from="imu" to="/vectornav_driver_node/imu/data"/>
+    <remap from="cloud" to="/radar/cloud"/>
+    <remap from="baro" to="/vectornav_driver_node/pressure"/>
+
+    <param name="bag_name" value="$(arg bag_name)"/>
+    <param name="s" value="$(arg s)"/>
+    <param name="duration" value="$(arg duration)"/>
+  </node>
+
+  <node pkg="rosbag" type="record" name="recorder" output="screen" respawn="false" if="$(arg record)" args="-O rig_result.bag
+    /rig_node/debug
+    /rig_node/debug/twist
+    /rig_node/odometry
+    /rig_node/graph/odometry
+    /rig_node/graph/extrinsic
+    /rig_node/graph/debug
+    /rig_node/graph/odom_path
+    /rig_node/cloud/filter
+    /rig_node/cloud/static
+    /rig_node/cloud/gaussians
+    /rig_node/cloud/map
+    /rig_node/cloud/lesser
+    /rig_node/cloud/greater
+    /tf
+    /tf_static
+  " />
+</launch>

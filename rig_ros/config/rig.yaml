@@ -1,0 +1,97 @@
+# General Params
+log_directory: /tmp/rig/
+
+radar:
+  log_level: 2 # trace/debug/info/warn/err/critical
+  use_angular_velocity: true
+  filter:
+    range:
+      min: 0.1
+      max: 16
+    min_db: 5
+    azimuth_threshold_deg: 60
+    elevation_threshold_deg: 60
+  estimate_extrinsic: true
+  doppler:
+    robust_cost:
+      lesser: cauchy
+      greater: cauchy
+  point:
+    enabled: false
+    robust_cost: none
+  map:
+    enabled: false # turn off to save compute if not using point
+    n_scans_delay: 0
+    voxel_grid_leaf_size: 0.1
+    search_radius: 0.5
+    minimum_neighbors: 20
+
+# TODO: reduce complexity
+gravity:
+  aligned_initialization: true
+  estimate: false
+  magnitude: 9.82145996
+
+barometer:
+  enabled: false
+  sigma: 0.7
+  bias_sigma: 2.0e-3
+  robust_cost: huber
+
+graph:
+  log_level: 2 # trace/debug/info/warn/err/critical
+  additional_iterations: 5
+  world_frame: odom
+  body_frame: vn100
+  use_fixed_lag: true
+  smoother:
+    lag: 1.0
+    relinearize_skip: 1
+    initial_sigma:
+      attitude_deg: [6.0, 6.0, 1.0e-6]
+      position: [1.0e-6, 1.0e-6, 1.0e-6]
+      velocity: [1.0e-6, 1.0e-6, 1.0e-6]
+      accel_bias: [1.0e-2, 1.0e-2, 1.0e-2]
+      gyro_bias: [1.0e-5, 1.0e-5, 1.0e-5]
+      extrinsic_attitude_deg: [0.25, 0.25, 0.25]
+      extrinsic_position: [0.002, 0.002, 0.002]
+      barometer_bias: 1
+    relinearize_threshold:
+      # attitude_deg: 1.0e-2
+      # position: 1.0e-4
+      # velocity: 1.0e-4
+      # accel_bias: 1.0e-5
+      # gyro_bias: 1.0e-5
+      # extrinsic_attitude_deg: 1.0e-2
+      # extrinsic_position: 1.0e-4
+      attitude_deg: 0
+      position: 0
+      velocity: 0
+      accel_bias: 0
+      gyro_bias: 0
+      extrinsic_attitude_deg: 0
+      extrinsic_position: 0
+    enable_relinearization: true
+    evaluate_nonlinear_error: false
+    factorization_method: CHOLESKY
+    cache_linearized_factors: true
+    enable_detailed_results: false
+    enable_partial_relinearization_check: false
+    find_unused_factor_slots: true
+
+imu:
+  log_level: 2 # trace/debug/info/warn/err/critical
+  pose_init_wait: 1
+  ts_offset: 0
+  interpolation_max_ts_diff: 0.1
+  extrapolation_max_ts_diff: 0.1
+  preintegration:
+    accel_noise_density: 0.0013886655606357616 # [ m / s^2 / sqrt(Hz) ]   ( accel "white noise" )
+    accel_bias_random_walk: 8.538212723310593e-05 # [ m / s^3 / sqrt(Hz) ].  ( accel bias diffusion )
+    gyro_noise_density: 5.4380545102010436e-05 # [ rad / s / sqrt(Hz) ]   ( gyro "white noise" )
+    gyro_bias_random_walk: 1.6587925152480572e-06 # [ rad / s^2 / sqrt(Hz) ] ( gyro bias diffusion )
+    integration_covariance: 0
+    bias_acc_omega_int: 0
+  accel_bias_prior: [-0.0155, -0.0065, 0.065]
+  gyro_bias_prior: [0, 0, 0]
+  estimate_gyro_bias: true

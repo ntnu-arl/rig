@@ -1,0 +1,7 @@
+l_BR_B: [0.077, 0.016, -0.063]
+q_R_B: [0.963, -0.021, -0.265, 0.021]
+frame_time_ms: 18.394
+range_sigma: 0.022655725460494734
+doppler_resolution: 0.12484375 # TODO: standard deviation instead of resolution
+doppler_max: 3.995
+phase_resolution_deg: 5.625
