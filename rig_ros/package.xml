@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>rig</name>
+  <version>1.0.0</version>
+  <description>The rig package</description>
+
+  <maintainer email="morten.c.nissov@gmail.com">Morten Nissov</maintainer>
+  <author email="morten.c.nissov@gmail.com">Morten Nissov</author>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>pcl_conversions</depend>
+  <depend>eigen_conversions</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_eigen</depend>
+  <depend>nav_msgs</depend>
+  <depend>rig_msgs</depend>
+  <depend>tf_to_trajectory</depend>
+  <depend>visualization_msgs</depend>
+  <depend>config_utilities</depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+  </export>
+</package>
