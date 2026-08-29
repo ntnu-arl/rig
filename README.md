@@ -8,6 +8,8 @@ This repository contains the implementation of the work [On the Characterization
 
 The method consists of a factor graph-based radar-inertial odometry fusing radar Doppler, radar range, and barometric pressure measurements using the incremental fixed-lag smoother from [GTSAM](https://github.com/borglab/gtsam).
 
+[![Video Title Screen](https://img.youtube.com/vi/nS2WgZldIv4/maxresdefault.jpg)](https://www.youtube.com/watch?v=nS2WgZldIv4)
+
 ## Build
 
 **Dependencies:**
@@ -60,7 +62,7 @@ Sensor specific and more general method parameters are set in `rig_ros/config/ra
 
 The datasets used in the paper are available on [huggingface](https://huggingface.co/datasets/ntnu-arl/rig_dataset), along with additional information regarding the physical setup and sensor data.
 
-## Citation
+## Reference
 
 If you use any of this implementation or accompanying data in your research, please cite:
 
